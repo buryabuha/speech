@@ -45,6 +45,10 @@
       console.log('Промежуточный результат: ', result[0].transcript);
     }
   };
+    
+  recognizer.onend = function () {
+    speech();
+  };
 
   function speech () {
     // Начинаем слушать микрофон и распознавать голос
