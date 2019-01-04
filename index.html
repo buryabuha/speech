@@ -10,7 +10,7 @@
   <button onclick="talk ()">Проговорить</button>
   <button onclick="stop ()">Остановить</button>
   
-  <textarea onclick="speech ()" name="text_"></textarea>
+  <textarea name="text_"></textarea>
 
   <script>
   // Создаем распознаватель
@@ -86,6 +86,8 @@
      sel.text=_text;
     }
   } // end function
+    
+  speech();
   </script>
 
 </body>
