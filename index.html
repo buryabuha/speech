@@ -9,6 +9,8 @@
   <button onclick="speech ()">Слушать</button>
   <button onclick="talk ()">Проговорить</button>
   <button onclick="stop ()">Остановить</button>
+  
+  <textarea id="alltext"></textarea>
 
   <script>
   // Создаем распознаватель
@@ -19,12 +21,15 @@
 
   // Какой язык будем распознавать?
   recognizer.lang = 'ru-Ru';
+    
+  
 
   // Используем колбек для обработки результатов
   recognizer.onresult = function (event) {
     var result = event.results[event.resultIndex];
     if (result.isFinal) {
       alert('Вы сказали: ' + result[0].transcript);
+      insert_text_cursor('text_','<strong>');
     } else {
       console.log('Промежуточный результат: ', result[0].transcript);
     }
@@ -45,6 +50,42 @@
   function stop () {
     synth.pause();
   }
+    
+  function insert_text_cursor(textarea, _text)
+    // _obj_name - name объекта - как правило, textarea, но при желании можно сделать любой
+    // указываем именно NAME, так как согласно стандартам DOCTYPE HTML 4.01 strict и выше
+    // свойство ID у объектов ввода является не приемлемым и требуется обращаться только name
+    // _text - текст, который требуется вставить в том место, где сейчас находится курсор
+    {
+    // берем объект
+    var area = document.getElementsByName(textarea).item(0);
+
+    // ЕСЛИ Mozilla и другие НОРМАЛЬНЫЕ браузеры, ТО
+    if ((area.selectionStart)||(area.selectionStart=='0'))
+    {// определяем, где начало выделения, если оно существует
+     var p_start = area.selectionStart;
+
+     // определяем, где заканчивается выделение, если оно существует
+     var p_end = area.selectionEnd;
+
+     // вставляем соответствующий текст в указанное место
+     area.value = area.value.substring(0,p_start)+_text+area.value.substring(p_end,area.value.length);
+    }
+
+    // Исправляем очередной геморрой с Internet Explorer
+    // единственный НЕ человеческий браузер
+    // ЕСЛИ объект может иметь выделения, ТО
+    if (document.selection)
+    {// передаем фокус ввода на нужный нам объект
+     area.focus();
+
+     // узнаем выделение, если оно существует
+     sel = document.selection.createRange();
+
+     // вставляет текст в указанное место
+     sel.text=_text;
+    }
+  } // end function
   </script>
 
 </body>
