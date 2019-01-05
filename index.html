@@ -108,7 +108,7 @@
   
   function deleteValue() {
     var name = document.getElementById('name');
-    var textarea = document.getElementsByName(textarea).item(0);
+    var textarea = document.getElementsByName('text_');
     var data = textarea.value;
     textarea.value = textarea.value.replaceAll(name.value, "");
   }
