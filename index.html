@@ -22,7 +22,7 @@
   <button onclick="talk ()">Проговорить</button>
   <button onclick="stop ()">Остановить</button> -->
   
-  <textarea name="text_" autofocus></textarea>
+  <textarea id="result" name="text_" autofocus></textarea>
 
   <script>
   // Создаем распознаватель
@@ -108,7 +108,7 @@
   
   function deleteValue() {
     var name = document.getElementById('name');
-    var textarea = document.getElementsByName('text_');
+    var textarea = document.getElementsById('result');
     var data = textarea.value;
     textarea.value = textarea.value.replaceAll(name.value, "");
   }
