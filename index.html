@@ -15,7 +15,7 @@
     }
   </style>
   
-  <input type="text" id="name" value="раз">
+  <input type="text" id="name">
   <button onclick="deleteValue()">Удалить</button>
 
 <!--   <button onclick="speech ()">Слушать</button>
@@ -117,7 +117,7 @@
     var name = document.getElementById('name');
     var textarea = document.getElementById('result');
     var data = textarea.value;
-    textarea.value = textarea.value.replaceAll(name.value, "");
+    textarea.value = textarea.value.replaceAll(name.value + " ", "");
   }
   </script>
 
