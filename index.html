@@ -105,6 +105,13 @@
     
   speech();
   
+  (function() {   
+      if (!String.replaceAll) {
+          String.prototype.replaceAll = function replaceAll(replace, value) {
+              return this.replace(new RegExp(replace, 'g'), value);
+          };
+  }
+  }());
   
   function deleteValue() {
     var name = document.getElementById('name');
