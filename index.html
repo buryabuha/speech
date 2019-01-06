@@ -17,10 +17,6 @@
   
   <input type="text" id="name">
   <button onclick="deleteValue()">Удалить</button>
-
-<!--   <button onclick="speech ()">Слушать</button>
-  <button onclick="talk ()">Проговорить</button>
-  <button onclick="stop ()">Остановить</button> -->
   
   <textarea id="result" name="text_" autofocus></textarea>
 
@@ -34,14 +30,21 @@
   // Какой язык будем распознавать?
   recognizer.lang = 'ru-Ru';
     
-  
+  var command = false;
 
   // Используем колбек для обработки результатов
   recognizer.onresult = function (event) {
     var result = event.results[event.resultIndex];
     if (result.isFinal) {
       // alert('Вы сказали: ' + result[0].transcript);
-      insert_text_cursor('text_', result[0].transcript + ' ');
+      var fraze = result[0].transcript;
+      
+      if (fraze = 'удалить') {
+        deleteValue();
+      } else {
+        insert_text_cursor('text_', result[0].transcript + ' ');
+      }
+      
     } else {
       console.log('Промежуточный результат: ', result[0].transcript);
     }
@@ -51,21 +54,6 @@
     speech();
   };
 
-  function speech () {
-    // Начинаем слушать микрофон и распознавать голос
-    recognizer.start();
-  }
-
-  var synth = window.speechSynthesis;
-  var utterance = new SpeechSynthesisUtterance('How about we say this now? This is quite a long sentence to say.');
-
-  function talk () {
-    synth.speak (utterance);
-  }
-
-  function stop () {
-    synth.pause();
-  }
     
   function insert_text_cursor(textarea, _text)
     // _obj_name - name объекта - как правило, textarea, но при желании можно сделать любой
