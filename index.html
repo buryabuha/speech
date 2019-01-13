@@ -39,11 +39,11 @@
       // alert('Вы сказали: ' + result[0].transcript);
       var fraze = result[0].transcript;
       
-      if (fraze = 'удалить') {
-        deleteValue();
-      } else {
+//       if (fraze = 'удалить') {
+//         deleteValue();
+//       } else {
         insert_text_cursor('text_', result[0].transcript + ' ');
-      }
+//       }
       
     } else {
       console.log('Промежуточный результат: ', result[0].transcript);
